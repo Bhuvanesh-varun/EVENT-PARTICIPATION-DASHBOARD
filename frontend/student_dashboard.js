@@ -10,7 +10,22 @@ async function loadData() {
   try {
     const res = await fetch("./data/events.json");
     const json = await res.json();
-    allData = json.All_Together_Data || [];
+
+    const allTogether = json.All_Together_Data || [];
+    const eventsMeta = json.Sheet1 || [];
+    const studentsMeta = json.Sheet2 || [];
+
+    // 🔗 Create lookup maps
+    const eventMap = Object.fromEntries(eventsMeta.map(e => [e.Event_ID, e]));
+    const studentMap = Object.fromEntries(studentsMeta.map(s => [s.Student_ID, s]));
+
+    // 🧩 Merge Event_Date + Department into main dataset
+    allData = allTogether.map(r => ({
+      ...r,
+      Event_Date: eventMap[r.Event_ID]?.Event_Date || "—",
+      Department: studentMap[r.Student_ID]?.Department || "N/A",
+    }));
+
     populateStudents();
     loadFromQuery();
   } catch (err) {
@@ -47,9 +62,9 @@ function renderDashboard(studentID) {
   document.getElementById("studentDept").textContent = student.Department || "N/A";
 
   const totalEvents = records.length;
-  const validAwards = records.filter(r => r.Award && r.Award !== "Not Attended").length;
+  const validAwards = records.filter(r => r.Award && r.Award !== "Not Attended" && r.Award !== "None").length;
   const attended = records.filter(r => r.Attendance_Status === "Attended").length;
-  const attendancePercent = ((attended / totalEvents) * 100).toFixed(2);
+  const attendancePercent = totalEvents > 0 ? ((attended / totalEvents) * 100).toFixed(2) : 0;
 
   document.getElementById("registeredCount").textContent = totalEvents;
   document.getElementById("validAwards").textContent = validAwards;
@@ -79,38 +94,81 @@ function renderCharts(records, attended, totalEvents) {
     },
     options: {
       cutout: "70%",
-      plugins: { legend: { position: "bottom" } }
+      plugins: { 
+        legend: { 
+          position: "bottom" 
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              const label = context.label || '';
+              const value = context.raw || 0;
+              const total = context.dataset.data.reduce((a, b) => a + b, 0);
+              const percentage = Math.round((value / total) * 100);
+              return `${label}: ${value} (${percentage}%)`;
+            }
+          }
+        }
+      }
     }
   });
   currentCharts.push(attendanceChart);
 
-  // 2️⃣ Awards breakdown
+  // 2️⃣ Awards distribution
   const awards = {};
   records.forEach(r => {
     const a = r.Award || "None";
-    awards[a] = (awards[a] || 0) + 1;
+    if (a !== "Not Attended") {
+      awards[a] = (awards[a] || 0) + 1;
+    }
   });
-  const awardChart = new Chart(document.getElementById("participationRoleChart"), {
+  
+  const awardChart = new Chart(document.getElementById("awardChart"), {
     type: "pie",
     data: {
       labels: Object.keys(awards),
-      datasets: [{ data: Object.values(awards), backgroundColor: ["#00b4d8", "#48cae4", "#90e0ef", "#caf0f8"] }]
+      datasets: [{ 
+        data: Object.values(awards), 
+        backgroundColor: ["#00b4d8", "#48cae4", "#90e0ef", "#caf0f8", "#0077b6", "#023e8a"] 
+      }]
     },
-    options: { plugins: { legend: { position: "bottom" } } }
+    options: { 
+      plugins: { 
+        legend: { 
+          position: "bottom" 
+        } 
+      } 
+    }
   });
   currentCharts.push(awardChart);
 
-  // 3️⃣ Feedback tone analysis
-  const feedbackGroups = { Excellent: 0, Good: 0, Creative: 0, "Needs Improvement": 0, Other: 0 };
+  // 3️⃣ Feedback analysis
+  const feedbackGroups = { 
+    Excellent: 0, 
+    Good: 0, 
+    Creative: 0, 
+    "Needs Improvement": 0, 
+    "No Feedback": 0 
+  };
+  
   records.forEach(r => {
     const fb = (r.Feedback || "").toLowerCase();
-    if (fb.includes("excellent") || fb.includes("outstanding")) feedbackGroups.Excellent++;
-    else if (fb.includes("good") || fb.includes("great") || fb.includes("energetic")) feedbackGroups.Good++;
-    else if (fb.includes("creative") || fb.includes("innovative")) feedbackGroups.Creative++;
-    else if (fb.includes("need")) feedbackGroups["Needs Improvement"]++;
-    else if (fb && fb !== "not attended") feedbackGroups.Other++;
+    if (!fb || fb === "not attended") {
+      feedbackGroups["No Feedback"]++;
+    } else if (fb.includes("excellent") || fb.includes("outstanding")) {
+      feedbackGroups.Excellent++;
+    } else if (fb.includes("good") || fb.includes("great") || fb.includes("energetic")) {
+      feedbackGroups.Good++;
+    } else if (fb.includes("creative") || fb.includes("innovative")) {
+      feedbackGroups.Creative++;
+    } else if (fb.includes("need") || fb.includes("improve")) {
+      feedbackGroups["Needs Improvement"]++;
+    } else {
+      feedbackGroups["No Feedback"]++;
+    }
   });
-  const feedbackChart = new Chart(document.getElementById("eventTypeChart"), {
+  
+  const feedbackChart = new Chart(document.getElementById("feedbackChart"), {
     type: "pie",
     data: {
       labels: Object.keys(feedbackGroups),
@@ -120,28 +178,47 @@ function renderCharts(records, attended, totalEvents) {
       }]
     },
     options: {
-      plugins: { legend: { display: false } },
-      scales: { y: { beginAtZero: true } }
+      plugins: { 
+        legend: { 
+          position: "bottom" 
+        } 
+      }
     }
   });
   currentCharts.push(feedbackChart);
 
-  // 4️⃣ Registration trend
+  // 4️⃣ Attendance timeline
   const sorted = [...records].sort((a, b) => new Date(a.Registration_Date) - new Date(b.Registration_Date));
-  const dates = sorted.map(r => r.Registration_Date);
+  const dates = sorted.map(r => {
+    const date = new Date(r.Registration_Date);
+    return `${date.getMonth()+1}/${date.getDate()}`;
+  });
+  
   const attendedTrend = sorted.map(r => (r.Attendance_Status === "Attended" ? 1 : 0));
-  const trendChart = new Chart(document.getElementById("feedbackAwardChart"), {
+  
+  const trendChart = new Chart(document.getElementById("attendanceTimelineChart"), {
     type: "line",
     data: {
       labels: dates,
       datasets: [{
-        label: "Attendance Timeline",
+        label: "Attendance (1=Attended, 0=Absent)",
         data: attendedTrend,
         borderColor: "#0077b6",
-        tension: 0.3
+        backgroundColor: "rgba(0, 119, 182, 0.1)",
+        tension: 0.3,
+        fill: true
       }]
     },
-    options: { scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } } }
+    options: { 
+      scales: { 
+        y: { 
+          beginAtZero: true, 
+          ticks: { 
+            stepSize: 1 
+          } 
+        } 
+      } 
+    }
   });
   currentCharts.push(trendChart);
 }
@@ -153,7 +230,7 @@ function renderTable(records) {
     <tr class="${r.Attendance_Status === "Absent" ? "table-danger" : ""}">
       <td>${r.Event_Name}</td>
       <td>${r.Registration_Date}</td>
-      <td>${r.Event_ID || "—"}</td>
+      <td>${r.Event_Date || "—"}</td>
       <td>${r.Award}</td>
       <td>${r.Participation_Role}</td>
       <td>${r.Feedback}</td>
