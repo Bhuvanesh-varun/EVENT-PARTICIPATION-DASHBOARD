@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Explore Events | Student Event Dashboard</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+  <style>
+    body {
+      background: #f8f9fa;
+      font-family: system-ui, sans-serif;
+      padding-top: 70px;
+    }
+    .event-card {
+      border: 0;
+      border-radius: 10px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+      transition: transform .2s ease;
+    }
+    .event-card:hover {
+      transform: translateY(-5px);
+    }
+    .badge-status {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg fixed-top bg-white border-bottom shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="index.html">🎓 Student Event <span class="text-primary">Dashboard</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navCollapse">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navCollapse">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="#">Explore Events</a></li>
+          <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <header class="bg-light py-5 border-bottom">
+    <div class="container text-center">
+      <h1 class="fw-bold mb-2">Explore College Events</h1>
+      <p class="text-muted mb-4">Browse technical, cultural, and sports events — stay informed and get involved!</p>
+
+      <!-- SEARCH BAR -->
+      <div class="col-md-6 mx-auto">
+        <div class="input-group">
+          <input type="text" id="searchInput" class="form-control" placeholder="Search events by name or department...">
+          <button class="btn btn-primary" id="searchBtn"><i class="bi bi-search"></i></button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- CATEGORY FILTER -->
+  <section class="py-4 border-bottom">
+    <div class="container text-center">
+      <div class="btn-group" role="group">
+        <button class="btn btn-outline-primary active" data-category="all">All</button>
+        <button class="btn btn-outline-primary" data-category="technical">Technical</button>
+        <button class="btn btn-outline-primary" data-category="cultural">Cultural</button>
+        <button class="btn btn-outline-primary" data-category="sports">Sports</button>
+        <button class="btn btn-outline-primary" data-category="workshop">Workshops</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVENT LIST SECTION -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row g-4" id="eventList">
+        
+        <!-- Example Event Card (to be generated dynamically later) -->
+        <div class="col-md-4">
+          <div class="card event-card h-100">
+            <img src="https://images.unsplash.com/photo-1515169067865-5387ec356754?auto=format&fit=crop&w=800&q=60" 
+                 class="card-img-top" alt="Event Image">
+            <div class="card-body">
+              <h5 class="card-title mb-1">Hackathon 2025</h5>
+              <p class="text-muted small mb-1">CSE Department • 10 Nov 2025</p>
+              <span class="badge bg-success badge-status mb-2">Upcoming</span>
+              <p class="small text-muted">An overnight coding challenge for all departments.</p>
+              <button class="btn btn-sm btn-primary w-100">View Details</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- More cards will be loaded dynamically here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- EVENT DETAILS MODAL -->
+  <div class="modal fade" id="eventModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Event Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Event details will appear dynamically here -->
+          <div id="modalContent">
+            <h4 id="modalEventName"></h4>
+            <p id="modalEventDesc"></p>
+            <p class="text-muted small" id="modalEventInfo"></p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+          <button class="btn btn-primary" id="registerBtn">Register</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="py-4 border-top text-center text-muted small">
+    &copy; <span id="year"></span> Student Event Dashboard
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+  <script src="js/events.js"></script>
+
+</body>
+</html>
