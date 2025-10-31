@@ -264,3 +264,45 @@ document.addEventListener("DOMContentLoaded", () => {
       .replace(/'/g, "&#039;");
   }
 });
+
+
+
+// for event.html page
+document.addEventListener("DOMContentLoaded", function () {
+  const table = document.getElementById("eventsTable");
+  const thead = table.querySelector("thead");
+  const tbody = table.querySelector("tbody");
+
+  // Adjust this path according to where your JSON file is located
+  fetch("data/events.json")
+    .then(response => response.json())
+    .then(data => {
+      // Access only the 'Sheet1' data
+      const eventData = data["Sheet1"];
+
+      if (!eventData || eventData.length === 0) {
+        thead.innerHTML = "<tr><th>No Event Data Found in Sheet1</th></tr>";
+        return;
+      }
+
+      renderTable(eventData);
+    })
+    .catch(err => {
+      console.error("Error loading events.json:", err);
+      thead.innerHTML = "<tr><th>Error loading event data</th></tr>";
+    });
+
+  // Function to render a dynamic table
+  function renderTable(dataArray) {
+    const headers = Object.keys(dataArray[0]);
+
+    // Table Headings
+    thead.innerHTML = "<tr>" + headers.map(h => `<th>${h.replace(/_/g, " ")}</th>`).join("") + "</tr>";
+
+    // Table Rows
+    tbody.innerHTML = dataArray.map(row => {
+      return "<tr>" + headers.map(h => `<td>${row[h] ?? ""}</td>`).join("") + "</tr>";
+    }).join("");
+  }
+});
+

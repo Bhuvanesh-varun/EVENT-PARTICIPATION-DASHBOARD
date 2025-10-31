@@ -206,7 +206,7 @@
     <a href="dashboard.html"><i class="bi bi-house-door"></i> Event Dashboard</a>
     <a href="student_dashboard.html"><i class="bi bi-people"></i> Student Dashboard</a>
     <a href="event.html"><i class="bi bi-calendar-event"></i> Events</a>
-    <a href="#students"><i class="bi bi-person-lines-fill"></i> Students</a>
+    <a href="student-info.html"><i class="bi bi-person-lines-fill"></i> Students</a>
     <a href="index.html" id="logoutBtnSidebar" class="mt-auto text-danger"><i class="bi bi-box-arrow-right"></i> Logout</a>
   </div>
 
@@ -267,31 +267,24 @@
 
       <!-- Charts Row 1 -->
       <div class="row g-2 mb-3">
-        <div class="col-md-4">
+        <div class="col-md-6">
           <div class="chart-box">
             <h6 class="text-center fw-semibold mb-2">Total Participants by Event_Type</h6>
             <div class="chart-wrapper"><canvas id="eventTypeChart"></canvas></div>
           </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-6">
           <div class="chart-box">
             <h6 class="text-center fw-semibold mb-2">Count of Feedback & Award by Registration Date</h6>
             <div class="chart-wrapper"><canvas id="feedbackTimelineChart"></canvas></div>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="chart-box">
-            <h6 class="text-center fw-semibold mb-2">Registered_Events_Count by Participation_Role</h6>
-            <div class="chart-wrapper"><canvas id="roleChart"></canvas></div>
           </div>
         </div>
       </div>
 
       <!-- Charts Row 2 -->
       <div class="row g-2 mb-3">
-        <div class="col-md-4">
+        <div class="col-md-6">
           <div class="chart-box text-center" style="position:relative;">
             <h6 class="mb-2">Attendance %</h6>
             <div class="chart-wrapper">
@@ -302,8 +295,15 @@
             </div>
           </div>
         </div>
-
-        <div class="col-md-8">
+        <div class="col-md-6">
+          <div class="chart-box">
+            <h6 class="text-center fw-semibold mb-2">Registered_Events_Count by Participation_Role</h6>
+            <div class="chart-wrapper"><canvas id="roleChart"></canvas></div>
+          </div>
+        </div>  
+      </div>
+      <div class="row g-2 mb-3">
+        <div class="col-md-12">
           <div class="chart-box">
             <h6 class="mb-2">Event Details</h6>
             <div class="table-responsive" style="max-height:360px; overflow:auto;">
