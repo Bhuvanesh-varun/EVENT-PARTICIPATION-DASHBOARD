@@ -14,7 +14,7 @@
       background: #f6f8fb;
       font-family: 'Segoe UI', sans-serif;
       display: flex;
-      min-height: 100vh;
+      min-height: 100vh;  
     }
 
     /* Sidebar styles */
@@ -93,13 +93,12 @@
   <!-- Sidebar -->
   <div class="sidebar">
     <h4><i class="bi bi-speedometer2"></i> Admin Panel</h4>
-    <a href="index.html"><i class="bi bi-house-door"></i> Dashboard</a>
+    <a href="admin.html"><i class="bi bi-house-door"></i> Home</a>
     <a href="dashboard.html"><i class="bi bi-house-door"></i> Event Dashboard</a>
-    <a href="#participants"><i class="bi bi-people"></i> Participants</a>
-    <a href="#events"><i class="bi bi-calendar-event"></i> Events</a>
+    <a href="student_dashboard.html"><i class="bi bi-people"></i> Student Dashboard</a>
+    <a href="event.html"><i class="bi bi-calendar-event"></i> Events</a>
     <a href="#students"><i class="bi bi-person-lines-fill"></i> Students</a>
-    <a href="#"><i class="bi bi-gear"></i> Settings</a>
-    <a href="#" id="logoutBtnSidebar" class="mt-auto text-danger"><i class="bi bi-box-arrow-right"></i> Logout</a>
+    <a href="index.html" id="logoutBtnSidebar" class="mt-auto text-danger"><i class="bi bi-box-arrow-right"></i> Logout</a>
   </div>
 
   <!-- Main Content -->
@@ -108,14 +107,13 @@
     <div class="container-fluid">
       <div class="d-flex justify-content-between align-items-center mb-3">
         <h3 class="mb-0">Admin — Event Dashboard</h3>
-        <div>
+        <!-- <div>
           <button id="exportBtn" class="btn btn-outline-primary me-2"><i class="bi bi-download"></i> Export JSON</button>
           <label class="btn btn-primary mb-0 me-2">
             <i class="bi bi-upload"></i> Upload JSON
             <input id="adminUpload" type="file" accept=".json" hidden>
           </label>
-          <button id="logoutBtn" class="btn btn-outline-danger"><i class="bi bi-box-arrow-right"></i> Logout</button>
-        </div>
+        </div> -->
       </div>
 
       <!-- Top action panel -->
@@ -126,9 +124,9 @@
               <button id="btnAddParticipant" class="btn btn-success">Add Participant</button>
               <button id="btnAddEvent" class="btn btn-outline-primary">Add Event</button>
               <button id="btnAddStudent" class="btn btn-outline-secondary">Add Student</button>
-              <button id="btnSaveLocal" class="btn btn-info ms-auto"><i class="bi bi-save"></i> Save to localStorage</button>
+              <!-- <button id="btnSaveLocal" class="btn btn-info ms-auto"><i class="bi bi-save"></i> Save to localStorage</button> -->
             </div>
-            <div class="small-muted mt-2">Uploaded file: <span id="uploadedFileName">(none)</span></div>
+            <!-- <div class="small-muted mt-2">Uploaded file: <span id="uploadedFileName">(none)</span></div> -->
           </div>
           <div class="col-md-4 text-end">
             <div class="small-muted">Current dataset sizes:</div>

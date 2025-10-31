@@ -34,51 +34,44 @@
 
       /* Sidebar */
       .sidebar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 100vh;
-        width: 240px;
-        background: #0d6efd;
-        color: white;
-        display: flex;
-        flex-direction: column;
-        padding: 20px 10px;
-        transition: all 0.3s ease;
-        z-index: 1000;
-      }
+      width: 250px;
+      background: #1f2937;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      padding: 20px 10px;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+    }
 
-      .sidebar h4 {
-        text-align: center;
-        margin-bottom: 30px;
-        font-size: 1.2rem;
-      }
+    .sidebar h4 {
+      color: #fff;
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: 600;
+    }
 
-      .sidebar a {
-        color: white;
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 10px 15px;
-        border-radius: 6px;
-        margin: 4px 0;
-        transition: all 0.3s;
-      }
+    .sidebar a {
+      color: #cbd5e1;
+      text-decoration: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s;
+    }
 
-      .sidebar a:hover,
-      .sidebar a.active {
-        background: rgba(255, 255, 255, 0.15);
-      }
+    .sidebar a:hover,
+    .sidebar a.active {
+      background: #2563eb;
+      color: #fff;
+    }
 
-      .sidebar a i {
-        font-size: 1.1rem;
-      }
-
-      .sidebar #logoutBtnSidebar {
-        margin-top: auto;
-        color: #ffc107;
-      }
+    .sidebar i {
+      font-size: 1.1rem;
+    }
 
       /* Main Content */
       .main-content {
@@ -190,20 +183,16 @@
     </button>
 
     <!-- Sidebar -->
-    <div class="sidebar" id="sidebar">
-      <h4><i class="bi bi-speedometer2"></i> Admin Panel</h4>
-      <a href="index.html"><i class="bi bi-house-door"></i> Dashboard</a>
-      <a href="dashboard.html" class="active"
-        ><i class="bi bi-graph-up"></i> Event Dashboard</a
-      >
-      <a href="#participants"><i class="bi bi-people"></i> Participants</a>
-      <a href="#events"><i class="bi bi-calendar-event"></i> Events</a>
-      <a href="#students"><i class="bi bi-person-lines-fill"></i> Students</a>
-      <a href="#"><i class="bi bi-gear"></i> Settings</a>
-      <a href="#" id="logoutBtnSidebar" class="mt-auto text-warning"
-        ><i class="bi bi-box-arrow-right"></i> Logout</a
-      >
-    </div>
+    <!-- Sidebar -->
+  <div class="sidebar">
+    <h4><i class="bi bi-speedometer2"></i> Admin Panel</h4>
+    <a href="admin.html"><i class="bi bi-house-door"></i> Home</a>
+    <a href="dashboard.html"><i class="bi bi-house-door"></i> Event Dashboard</a>
+    <a href="student_dashboard.html"><i class="bi bi-people"></i> Student Dashboard</a>
+    <a href="event.html"><i class="bi bi-calendar-event"></i> Events</a>
+    <a href="#students"><i class="bi bi-person-lines-fill"></i> Students</a>
+    <a href="index.html" id="logoutBtnSidebar" class="mt-auto text-danger"><i class="bi bi-box-arrow-right"></i> Logout</a>
+  </div>
 
     <!-- Main Content -->
     <div class="main-content">
@@ -231,14 +220,14 @@
             </div>
           </div>
 
-          <div class="d-flex gap-2">
+          <!-- <div class="d-flex gap-2">
             <button
               class="btn btn-outline-primary"
               onclick="window.location.href='index.html'"
             >
               <i class="fas fa-house"></i> &nbsp;Go to Homepage
             </button>
-          </div>
+          </div> -->
         </div>
 
         <!-- controls -->
@@ -277,11 +266,11 @@
             </div>
           </div>
 
-          <div class="text-end small-muted">
+          <!-- <div class="text-end small-muted">
             <div style="font-size: 0.9rem">
               Sample UI matching provided image
             </div>
-          </div>
+          </div> -->
         </div>
 
         <!-- KPIs -->
