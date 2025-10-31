@@ -69,6 +69,12 @@ function enrichAllEvents() {
   });
 }
 
+  // Redirect to your desired page when button is clicked
+  document.getElementById("searchStudentBtn").addEventListener("click", () => {
+    // Change this URL later as needed
+    window.location.href = "student_dashboard.html";
+  });
+
 // Load JSON (change path if needed)
 fetch('./data/events.json')
   .then(res => {
@@ -382,13 +388,13 @@ function createPopupElement() {
   const existing = document.getElementById('studentPopup');
   if (existing) return existing;
 
-  const popup = document.createElement('div');
-  popup.id = 'studentPopup';
-  popup.style = `
-    position: fixed; z-index:9999; left:50%; top:50%; transform:translate(-50%,-50%);
-    width:880px; max-width:96vw; max-height:92vh; overflow-y:auto;
-    background:#fff; border-radius:12px; box-shadow:0 40px 90px rgba(2,6,23,0.35); padding:20px;
-  `;
+  // const popup = document.createElement('div');
+  // popup.id = 'studentPopup';
+  // popup.style = `
+  //   position: fixed; z-index:9999; left:50%; top:50%; transform:translate(-50%,-50%);
+  //   width:880px; max-width:96vw; max-height:92vh; overflow-y:auto;
+  //   background:#fff; border-radius:12px; box-shadow:0 40px 90px rgba(2,6,23,0.35); padding:20px;
+  // `;
   popup.innerHTML = `
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
       <div>
