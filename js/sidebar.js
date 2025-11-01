@@ -1,6 +1,6 @@
 // Dynamically load sidebar HTML into pages
 document.addEventListener("DOMContentLoaded", () => {
-  fetch("../components/sidebar.html")
+  fetch("components/sidebar.html")
     .then(response => response.text())
     .then(data => {
       document.body.insertAdjacentHTML("afterbegin", data);
