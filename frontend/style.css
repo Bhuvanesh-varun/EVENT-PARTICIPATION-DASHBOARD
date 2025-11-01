@@ -1,0 +1,105 @@
+/* === Global Styles === */
+body {
+  background: #e6f6f6;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color: #0b1220;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+/* === Sidebar === */
+.sidebar {
+  width: 250px;
+  background: #1f2937;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 10px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  transition: left 0.3s ease-in-out;
+  z-index: 1050;
+}
+
+.sidebar h4 {
+  color: #fff;
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: 600;
+}
+
+.sidebar a {
+  color: #cbd5e1;
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+  background: #2563eb;
+  color: #fff;
+}
+
+.sidebar i {
+  font-size: 1.1rem;
+}
+
+/* === Overlay for mobile === */
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1040;
+}
+
+/* === Main Content === */
+.main-content {
+  margin-left: 250px;
+  padding: 20px;
+  transition: margin-left 0.3s ease;
+}
+
+/* === Sidebar Toggle Button === */
+.sidebar-toggle-btn {
+  display: none;
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  background: #2563eb;
+  border: none;
+  color: white;
+  padding: 8px 10px;
+  border-radius: 6px;
+  z-index: 1100;
+}
+
+/* === Responsive Behaviour === */
+@media (max-width: 991px) {
+  .sidebar {
+    left: -250px;
+  }
+
+  .sidebar.active {
+    left: 0;
+  }
+
+  .overlay.active {
+    display: block;
+  }
+
+  .main-content {
+    margin-left: 0;
+  }
+
+  .sidebar-toggle-btn {
+    display: inline-block;
+  }
+}

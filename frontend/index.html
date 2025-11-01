@@ -65,7 +65,7 @@
       if (username === ADMIN_USER && password === ADMIN_PASS) {
         // Save login state
         localStorage.setItem('isAdminLoggedIn', 'true');
-        window.location.href = 'admin.html';
+        window.location.href = 'dashboard.html';
       } else {
         message.textContent = 'Invalid username or password.';
       }
