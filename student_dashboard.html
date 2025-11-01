@@ -125,8 +125,9 @@
     .kpi {
       border: 2px solid var(--border);
       border-radius: 6px;
-      padding: 12px;
+      padding: 8px;
       background: #fff;
+      margin: 0;
     }
 
     .kpi h2 {
@@ -150,7 +151,7 @@
     }
 
     .big-name {
-      font-size: 2.1rem;
+      font-size: 1.0rem;
       color: var(--accent);
       font-weight: 800;
     }
@@ -221,47 +222,52 @@
 
          </div>
         <h3 class="fw-bold text-primary mb-4">Student Dashboard</h3>
+        <div>
+
+        </div>
       </div>
 
       <!-- Header -->
-      <div class="row g-2 align-items-center mb-3">
-        <div class="col-md-2">
-          <div class="header-box">
+      <div class="row mb-3 gy-2">
+        <div class="col-md-4">
+          <div class="header-box text-center">
             <label class="form-label mb-1" for="studentSelect">Student_ID</label>
             <select id="studentSelect" class="form-select form-select-sm"></select>
           </div>
         </div>
 
-        <div class="col-md-6 text-center">
-          <div class="header-box">
+        <div class="col-md-4">
+          <div class="header-box text-center">
+            <h3 style="font-size: 16.5px;"><b>Name:</b></h3>
             <div id="studentName" class="big-name">Student Name</div>
           </div>
         </div>
 
-        <div class="col-md-2">
+        <div class="col-md-4">
           <div class="header-box text-center">
-            <div id="studentDept">Department</div>
+            <h3 style="font-size: 16.5px;"><b>Department:</b></h3>
+            <div id="studentDept" class="big-name">Department</div>
           </div>
         </div>
       </div>
 
       <!-- KPIs -->
       <div class="row text-center mb-3 gy-2">
-        <div class="col-md-2 offset-md-2">
+        <div class="col-md-4">
           <div class="kpi">
             <h2 id="registeredCount">0</h2>
             <div>Registered_Events_Count</div>
           </div>
         </div>
 
-        <div class="col-md-2">
+        <div class="col-md-4">
           <div class="kpi">
             <h2 id="validAwards">0</h2>
             <div>Valid_Awards_Count</div>
           </div>
         </div>
 
-        <div class="col-md-2">
+        <div class="col-md-4">
           <div class="kpi">
             <h2 id="participationPercent">0%</h2>
             <div>Participation %</div>
