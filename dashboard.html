@@ -197,7 +197,7 @@
       <div class="container-limited">
         <!-- header -->
         <div class="d-flex justify-content-between align-items-center mb-3">
-          <div class="dashboard-header d-flex align-items-center gap-3">
+          <div class="dashboard-header d-flex align-items-center gap-3 w-100">
             <div
               style="
                 width: 44px;
@@ -213,7 +213,7 @@
             </div>
             <div>
               <div style="font-weight: 700; font-size: 1.05rem">
-                Event Participation Dashboard
+                Event Dashboard
               </div>
             </div>
           </div>
@@ -239,7 +239,7 @@
             "
           >
             <div>
-              <label class="small-muted mb-1 d-block">Event</label>
+              <label class="small-muted mb-1 d-block">Select Event</label>
               <select
                 id="eventSelect"
                 class="form-select"
@@ -275,19 +275,19 @@
         <div class="row g-3 mb-4">
           <div class="col-md-3">
             <div class="metric-box kpi-card text-center">
-              <div class="small-muted">Count of Student_ID</div>
+              <div class="small-muted">Total Students</div>
               <div class="kpi-number text-primary" id="kpiUniqueStudents">0</div>
             </div>
           </div>
           <div class="col-md-3">
             <div class="metric-box kpi-card text-center">
-              <div class="small-muted">Count of Event_ID</div>
+              <div class="small-muted">Total Events</div>
               <div class="kpi-number text-primary" id="kpiUniqueEvents">0</div>
             </div>
           </div>
           <div class="col-md-3">
             <div class="metric-box kpi-card text-center">
-              <div class="small-muted">Total Participants (records)</div>
+              <div class="small-muted">Total Participations (records)</div>
               <div class="kpi-number text-primary" id="kpiTotalParticipants">
                 0
               </div>
@@ -311,10 +311,9 @@
                 class="d-flex justify-content-between align-items-center mb-2"
               >
                 <h6 class="mb-0 fw-bold">
-                  <i class="fas fa-users me-2 text-primary"></i>Count of
-                  Student_ID and First Student_Name by Department and Gender
+                  <i class="fas fa-users me-2 text-primary"></i>No of participants by Department by Gender
                 </h6>
-                <small class="small-muted">Gender split</small>
+                <small class="small-muted"></small>
               </div>
               <div class="chart-container">
                 <canvas id="deptGenderChart"></canvas>
@@ -328,10 +327,9 @@
                 class="d-flex justify-content-between align-items-center mb-2"
               >
                 <h6 class="mb-0 fw-bold">
-                  <i class="fas fa-chart-bar me-2 text-primary"></i>Count of
-                  Student_ID by Event_Name
+                  <i class="fas fa-chart-bar me-2 text-primary"></i>No of Participants by Event
                 </h6>
-                <small class="small-muted">Top events</small>
+                <small class="small-muted"></small>
               </div>
               <div class="chart-container">
                 <canvas id="eventCountChart"></canvas>
@@ -349,9 +347,9 @@
               >
                 <h6 class="mb-0 fw-bold">
                   <i class="fas fa-donut-small me-2 text-primary"></i>Total
-                  Participants by Event_Type
+                  Participants by Event Type
                 </h6>
-                <small class="small-muted">Distribution</small>
+                <small class="small-muted"></small>
               </div>
               <div class="chart-container" style="height: 240px">
                 <canvas id="eventTypeChart"></canvas>
@@ -368,7 +366,7 @@
                   <i class="fas fa-line-chart me-2 text-primary"></i>Total
                   Participants by Year
                 </h6>
-                <small class="small-muted">Trend</small>
+                <small class="small-muted"></small>
               </div>
               <div class="chart-container" style="height: 240px">
                 <canvas id="yearlyChart"></canvas>

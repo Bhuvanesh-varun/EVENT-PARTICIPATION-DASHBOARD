@@ -293,7 +293,7 @@ function renderDashboardByRecords(records) {
   records.forEach(r => {
     const d = r.Department || 'Unknown';
     const g = (r.Gender || 'Unknown').toLowerCase();
-    deptGender[d] = deptGender[d] || { male: 0, female: 0, other: 0 };
+    deptGender[d] = deptGender[d] || { male: 0, female: 0 };
     if (g === 'male' || g === 'm') deptGender[d].male++;
     else if (g === 'female' || g === 'f') deptGender[d].female++;
     else deptGender[d].other++;
